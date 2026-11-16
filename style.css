@@ -1144,3 +1144,214 @@ footer {
 }
 
 .skip:focus { top: 10px; }
+/* Responsive layout fixes */
+* {
+  box-sizing: border-box;
+}
+
+img, video, svg {
+  max-width: 100%;
+}
+
+.hero-grid > *,
+.path-grid > *,
+.project-grid > *,
+.catalog-grid > *,
+.practice-grid > *,
+.how-grid > *,
+.faq-grid > *,
+.contact-layout > *,
+.course-layout > *,
+.package-hero > *,
+.package-banner > * {
+  min-width: 0;
+}
+
+.code, pre, .table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+h1, h2, h3, p, a {
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    width: calc(100% - 32px);
+  }
+
+  .nav {
+    height: 76px;
+  }
+
+  .brand {
+    font-size: 21px;
+  }
+
+  .menu-button {
+    display: block;
+    background: transparent;
+    color: var(--navy);
+    border: 1px solid #ccd5d2;
+    padding: 9px 12px;
+    border-radius: 6px;
+  }
+
+  .nav nav {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    padding: 22px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .hero-grid,
+  .path-grid,
+  .project-grid,
+  .catalog-grid,
+  .practice-grid,
+  .how-grid,
+  .faq-grid,
+  .contact-layout,
+  .course-layout,
+  .package-hero,
+  .package-banner,
+  .benefit-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .benefit-grid article,
+  .benefit-grid article:nth-child(n) {
+    grid-column: auto;
+  }
+
+  h1,
+  .hero h1,
+  .package-hero h1 {
+    font-size: clamp(32px, 8vw, 46px);
+  }
+
+  h2,
+  .package-banner h2 {
+    font-size: 30px;
+  }
+
+  .hero {
+    padding: 36px 0;
+  }
+
+  .section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    transform: none;
+  }
+
+  .code {
+    font-size: 10px;
+  }
+
+  .actions,
+  .hero-notes,
+  .subject-strip > .wrap,
+  .package-tags {
+    flex-wrap: wrap;
+  }
+
+  .section-heading,
+  .end-cta {
+    display: block;
+  }
+
+  .section-heading p {
+    margin-top: 18px;
+  }
+
+  .end-cta {
+    padding: 28px;
+    margin-bottom: 48px;
+  }
+
+  .end-cta .button {
+    margin-top: 20px;
+  }
+
+  .path-card,
+  .catalog-card,
+  .project-card {
+    min-width: 0;
+  }
+
+  .enrol-card {
+    position: static;
+  }
+
+  .contact-layout,
+  .course-layout {
+    padding-top: 35px;
+    padding-bottom: 45px;
+  }
+
+  .form-panel {
+    padding: 22px;
+  }
+
+  .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form-panel input,
+  .form-panel select,
+  .form-panel textarea {
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  .package-banner,
+  .package-checkout {
+    padding: 24px;
+  }
+
+  .package-price {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .footer-top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .footer-bottom {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .footer-bottom a {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
