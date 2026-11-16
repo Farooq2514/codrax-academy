@@ -1555,3 +1555,37 @@ h1, h2, h3, p, a {
   white-space: nowrap;
   border: 0;
 }
+/* Place the chatbot at the bottom-right on every screen. */
+.codrax-chat-toggle {
+  position: fixed;
+  left: auto;
+  right: 18px;
+  top: auto;
+  bottom: 18px;
+  z-index: 1000;
+}
+
+.codrax-chat {
+  position: fixed;
+  left: auto;
+  right: 18px;
+  top: auto;
+  bottom: 88px;
+  z-index: 1001;
+  width: min(375px, calc(100vw - 36px));
+  max-height: calc(100dvh - 110px);
+}
+
+.codrax-chat-log {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.codrax-chat-log p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.codrax-chat[hidden] {
+  display: none !important;
+}

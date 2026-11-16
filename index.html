@@ -1,440 +1,808 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Learn to code. Build your foundation. | Codrax Academy</title>
-    <meta name="description" content="Beginner-friendly live online programming courses for college students. Explore Java, SQL, Spring Boot and practical coding at Codrax Academy.">
-    <meta name="theme-color" content="#142e4e">
-    <link rel="stylesheet" href="style.css">
-    <script src="site.js" defer></script>
-    <script src="course-data.js" defer></script>
-    <script src="chatbot.js" defer></script>
-  </head>
-  <body>
-    <a class="skip" href="#main">Skip to content</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learn to code. Build your foundation. | Codrax Academy</title>
+  <meta name="description"
+        content="Build your programming foundation with live online classes, hands-on projects, assignments, weekend TA support, mentor guidance, and monthly mocks at Codrax Academy.">
+  <meta name="theme-color" content="#142e4e">
 
-    <header class="site-header">
-      <div class="wrap nav">
-        <a class="brand" href="index.html" aria-label="Codrax Academy home">
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
+  <script src="course-data.js" defer></script>
+  <script src="chatbot.js" defer></script>
+
+  <style>
+    .home-java-price {
+      text-align: right;
+    }
+
+    .home-java-price small {
+      display: block;
+      margin-bottom: 5px;
+      color: #607081;
+      font-size: 12px;
+    }
+
+    .home-java-price strong {
+      display: block;
+      color: #142e4e;
+    }
+
+    .home-package {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 40px;
+      margin-bottom: 70px;
+      padding: 40px;
+      border-radius: 14px;
+      background: #142e4e;
+      color: #ffffff;
+    }
+
+    .home-package > div {
+      min-width: 0;
+    }
+
+    .home-package .eyebrow {
+      color: #c3dfcd;
+    }
+
+    .home-package h2 {
+      font-size: clamp(28px, 3.5vw, 40px);
+    }
+
+    .home-package p {
+      color: #c8d5e1;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .home-package-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .home-package-tags span {
+      padding: 6px 11px;
+      border: 1px solid #647e94;
+      border-radius: 25px;
+      font-size: 11px;
+    }
+
+    .home-package-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 14px;
+      padding-left: 30px;
+      border-left: 1px solid #52687c;
+    }
+
+    .home-package-price > span {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #c3dfcd;
+    }
+
+    .home-package-price > p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .home-package-price > strong {
+      font-family: Manrope, sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .home-package-price > b {
+      padding: 7px 11px;
+      border-radius: 5px;
+      background: #d7eddc;
+      color: #244d35;
+      font-size: 12px;
+    }
+
+    .home-package-price small {
+      color: #c8d5e1;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 750px) {
+      .home-package {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 25px;
+        padding: 25px;
+      }
+
+      .home-package-price {
+        padding: 25px 0 0;
+        border-left: 0;
+        border-top: 1px solid #52687c;
+      }
+
+      .home-package-price > strong {
+        font-size: 42px;
+      }
+
+      .home-package .button {
+        white-space: normal;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="Codrax Academy home">
+        <span class="brand-icon">&lt;/&gt;</span>
+        <span>Codrax<span class="brand-sub">ACADEMY</span></span>
+      </a>
+
+      <button class="menu-button"
+              type="button"
+              aria-expanded="false"
+              aria-controls="navigation">
+        Menu ☰
+      </button>
+
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="courses.html">Our courses</a>
+        <a href="#benefits">Why Codrax</a>
+        <a href="#faq">FAQs</a>
+        <a class="button small" href="contact.html?intent=demo">
+          Request a free demo <span aria-hidden="true">→</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="pill">
+            <span class="dot"></span>
+            BUILD YOUR PROGRAMMING FOUNDATION
+          </div>
+
+          <h1>
+            Your first line of code.<br>
+            <em>A whole new<br>way to think.</em>
+          </h1>
+
+          <p>
+            Three live online classes each week. Assignments after
+            every class. Personal TA support every weekend.
+            Build your programming foundation with guidance that
+            goes beyond the classroom.
+          </p>
+
+          <div class="actions">
+            <a class="button" href="contact.html?intent=demo">
+              Request a free demo →
+            </a>
+            <a class="text-link" href="courses.html">
+              Explore courses &amp; fees →
+            </a>
+          </div>
+
+          <div class="hero-notes">
+            <span>✓ Completely online</span>
+            <span>✓ 3 classes / week</span>
+            <span>✓ Weekend TA support</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-heading">
+            <span>SMALL STEPS. REAL UNDERSTANDING.</span>
+            <span>01 / START</span>
+          </div>
+
+          <div class="editor">
+            <div class="editor-bar">
+              <span class="dots">● ● ●</span>
+              <span>HelloFuture.java</span>
+              <span>JAVA</span>
+            </div>
+
+            <div class="code">
+              <div><i>1</i><span class="muted-code">// Every developer starts somewhere.</span></div>
+              <div><i>2</i><span><b>public class</b> HelloFuture {</span></div>
+              <div><i>3</i><span>  <b>public static void</b> main(String[] args) {</span></div>
+              <div><i>4</i><span>    System.out.println(<strong>"I can build this."</strong>);</span></div>
+              <div><i>5</i><span>  }</span></div>
+              <div><i>6</i><span>}</span></div>
+            </div>
+
+            <div class="terminal">
+              <span>OUTPUT</span>
+              <p>› I can build this.<span class="cursor">▍</span></p>
+            </div>
+          </div>
+
+          <div class="visual-bottom">
+            <span class="round-arrow">→</span>
+            <p>
+              Understand it. Write it.<br>
+              <strong>Make it your own.</strong>
+            </p>
+            <div class="visual-tag">From curious<br>to confident.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="benefits">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">THE CODRAX DIFFERENCE</span>
+          <h2>Teaching is the start.<br>Support keeps you moving.</h2>
+        </div>
+        <p>
+          A complete online learning routine built around<br>
+          classes, independent practice, and personal guidance.
+        </p>
+      </div>
+
+      <div class="benefit-grid">
+        <article>
+          <span class="eyebrow">01 / LEARN</span>
+          <h3>3 live online classes<br>every week</h3>
+          <p>
+            A structured schedule with space between classes
+            to practise and improve your skills.
+          </p>
+        </article>
+
+        <article>
+          <span class="eyebrow">02 / PRACTISE</span>
+          <h3>Assignments after<br>every class</h3>
+          <p>
+            Turn each lesson into practice. Build your weekly
+            routine around solving problems yourself.
+          </p>
+        </article>
+
+        <article>
+          <span class="eyebrow">03 / GET UNSTUCK</span>
+          <h3>Personal TA support<br>every weekend</h3>
+          <p>
+            Get help with doubts, assignment difficulties,
+            and understanding mistakes from a teaching assistant.
+          </p>
+        </article>
+
+        <article>
+          <span class="eyebrow">04 / FIND DIRECTION</span>
+          <h3>3 complimentary<br>mentor-session credits</h3>
+          <p>
+            Included with each course for additional guidance
+            alongside live classes and weekend TA support.
+          </p>
+        </article>
+
+        <article>
+          <span class="eyebrow">05 / CHECK YOUR PROGRESS</span>
+          <h3>A mock assessment<br>every month</h3>
+          <p>
+            Check your understanding, recognise gaps, and focus
+            your next round of practice during your active programme.
+          </p>
+        </article>
+
+        <article>
+          <span class="eyebrow">06 / BUILD</span>
+          <h3>Hands-on<br>projects</h3>
+          <p>
+            Apply what you learn to practical work.
+            Build, test, and explain your approach.
+          </p>
+        </article>
+      </div>
+
+      <p class="small-text benefit-note">
+        Call us to discuss the batch schedule, TA arrangements,
+        mentor-session length and credit validity, and mock format.
+      </p>
+    </section>
+
+    <section class="wrap section" id="path">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">A CLEAR PLACE TO BEGIN</span>
+          <h2>One foundation.<br>More possibilities.</h2>
+        </div>
+        <p>
+          You don’t have to learn everything at once.<br>
+          Start with Java, then choose your next step.
+        </p>
+      </div>
+
+      <div class="path-grid">
+        <article class="path-card featured">
+          <div class="card-top">
+            <span class="step">01</span>
+            <span class="badge">START HERE</span>
+          </div>
+
+          <h3>Programming<br>Foundations</h3>
+          <p>
+            Learn to think through a problem and turn your
+            ideas into working Java code.
+          </p>
+
+          <ul>
+            <li>Build confidence writing your own code</li>
+            <li>Practise after every class</li>
+            <li>Get support when you need it</li>
+          </ul>
+
+          <div class="course-meta">
+            <span>Java foundations</span>
+            <div class="home-java-price">
+              <small>Regular fee <del>₹9,999</del></small>
+              <strong>₹5,999</strong>
+              <small>Offer fee per student</small>
+            </div>
+          </div>
+
+          <a class="button" href="course-java.html">
+            View the Java course →
+          </a>
+        </article>
+
+        <article class="path-card">
+          <div class="card-top">
+            <span class="step">02</span>
+            <span class="label">BUILD ON YOUR BASICS</span>
+          </div>
+
+          <h3>Data &amp;<br>Problem-solving</h3>
+          <p>
+            Organise information, strengthen your logic,
+            and learn how software stores data.
+          </p>
+
+          <ul>
+            <li>Develop a consistent practice routine</li>
+            <li>Apply your skills to useful problems</li>
+            <li>Check progress through monthly mocks</li>
+          </ul>
+
+          <div class="card-bottom">
+            <span>Separate courses · Choose your next step</span>
+            <a class="text-link" href="courses.html#data">
+              Explore these courses →
+            </a>
+          </div>
+        </article>
+
+        <article class="path-card">
+          <div class="card-top">
+            <span class="step">03</span>
+            <span class="label">PUT IT TOGETHER</span>
+          </div>
+
+          <h3>Applications &amp;<br>Backend Development</h3>
+          <p>
+            Connect your programming skills to the
+            applications people use every day.
+          </p>
+
+          <ul>
+            <li>Bring your skills together in projects</li>
+            <li>Build applications you can explain</li>
+            <li>Discuss your next steps with a mentor</li>
+          </ul>
+
+          <div class="card-bottom">
+            <span>For learners with programming basics</span>
+            <a class="text-link" href="courses.html#applications">
+              Explore these courses →
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap home-package" id="package">
+      <div>
+        <span class="eyebrow">ALL SEVEN COURSES. ONE ENROLMENT.</span>
+        <h2>One foundation.<br>A complete learning journey.</h2>
+        <p>
+          Grow from programming foundations into application
+          development with practical projects, structured
+          assignments, and personal support.
+        </p>
+
+        <div class="home-package-tags">
+          <span>7 courses</span>
+          <span>100% online</span>
+          <span>Hands-on projects</span>
+          <span>Mentor + TA support</span>
+        </div>
+      </div>
+
+      <div class="home-package-price">
+        <span>COMPLETE LEARNING PACKAGE</span>
+        <p>Individual offer total <del>₹33,493</del></p>
+        <strong>₹16,749</strong>
+        <p>Total package fee per student</p>
+        <b>Save ₹16,744 · Approximately 50%</b>
+
+        <a class="button light" href="courses.html#package">
+          Explore the complete package →
+        </a>
+
+        <small>
+          Call us for the complete learning plan and programme schedule.
+        </small>
+      </div>
+    </section>
+
+    <section class="practice-section" id="practice">
+      <div class="wrap practice-grid">
+        <div>
+          <span class="eyebrow">
+            A LITTLE LESS SCROLLING. A LITTLE MORE THINKING.
+          </span>
+          <h2>Try your first<br>coding moment.</h2>
+          <p>
+            A loop repeats a task. Here, Java starts at 1,
+            keeps going while the number is at most 3,
+            and adds 1 each time.
+          </p>
+          <p class="practice-question">
+            What do you think this program prints?
+          </p>
+          <p class="small-text">
+            A short interactive example. No signup needed.
+          </p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-top">
+            <span>JAVA BASICS / LOOPS</span>
+            <span>01</span>
+          </div>
+
+          <pre><code><b>for</b> (int i = 1; i &lt;= 3; i++) {
+    System.out.println(i);
+}</code></pre>
+
+          <div class="answer-options"
+               role="group"
+               aria-label="Choose the output">
+            <button type="button" data-answer="wrong">0, 1, 2</button>
+            <button type="button" data-answer="right">1, 2, 3</button>
+            <button type="button" data-answer="wrong">1, 2, 3, 4</button>
+          </div>
+
+          <p id="answer-feedback" role="status">
+            Choose an answer to see the explanation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="projects">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">LEARNING WITH A PURPOSE</span>
+          <h2>Turn concepts into<br>something you can show.</h2>
+        </div>
+        <p>
+          Illustrative project ideas for your learning journey.<br>
+          Projects grow as your skills grow.
+        </p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-art marks">
+            <div class="mini-window">
+              <span>STUDENT MARKS · EXAMPLE</span>
+              <div class="score-row">
+                <span>Java</span><b>85 / 100</b>
+              </div>
+              <div class="bar"><span style="width:85%"></span></div>
+              <div class="score-row">
+                <span>SQL</span><b>92 / 100</b>
+              </div>
+              <div class="bar"><span style="width:92%"></span></div>
+              <div class="score-total">Average <b>88.5%</b></div>
+            </div>
+          </div>
+
+          <div class="project-copy">
+            <span class="eyebrow">JAVA · LOGIC</span>
+            <h3>Student marks calculator</h3>
+            <p>
+              Build a program that calculates marks and
+              clearly explains the result.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-art library">
+            <div class="mini-window">
+              <span>LIBRARY · EXAMPLE</span>
+              <div class="book-row">
+                <i>01</i><span>Java Fundamentals</span><b>Available</b>
+              </div>
+              <div class="book-row">
+                <i>02</i><span>Database Essentials</span>
+                <b class="issued">Issued</b>
+              </div>
+              <div class="book-row">
+                <i>03</i><span>Learning to Build</span><b>Available</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-copy">
+            <span class="eyebrow">JAVA · SQL</span>
+            <h3>Library record manager</h3>
+            <p>
+              Organise books and borrowers, manage records,
+              and find the information you need.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-art api">
+            <div class="mini-window">
+              <span>BACKEND · EXAMPLE</span>
+              <div class="api-route"><b>GET</b> /api/tasks</div>
+              <pre>{ "title": "Practice Java",
+  "completed": true }</pre>
+              <div class="status-ok">● 200 OK</div>
+            </div>
+          </div>
+
+          <div class="project-copy">
+            <span class="eyebrow">SPRING BOOT · REST APIs</span>
+            <h3>Study task manager</h3>
+            <p>
+              Build a backend to create tasks, update progress,
+              and store application data.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="how-section" id="how-it-works">
+      <div class="wrap how-grid">
+        <div>
+          <span class="eyebrow">A ROUTINE YOU CAN GROW WITH</span>
+          <h2>
+            Learn together.<br>
+            Practise yourself.<br>
+            Ask your questions.
+          </h2>
+          <p>
+            Three class days each week, assignments after
+            every class, personal weekend TA support,
+            and a monthly mock to check your progress.
+          </p>
+          <a class="text-link" href="contact.html">
+            Ask about batches →
+          </a>
+        </div>
+
+        <div class="steps">
+          <article>
+            <span>01</span>
+            <div>
+              <h3>Understand the concept</h3>
+              <p>
+                Join three live online classes each week
+                and learn through guided explanations and examples.
+              </p>
+            </div>
+          </article>
+
+          <article>
+            <span>02</span>
+            <div>
+              <h3>Put it into practice</h3>
+              <p>
+                Complete the assignment after each class.
+                Use the time between sessions to improve your skills.
+              </p>
+            </div>
+          </article>
+
+          <article>
+            <span>03</span>
+            <div>
+              <h3>Clear your doubts</h3>
+              <p>
+                Get personal teaching assistant support
+                every weekend with doubts and assignment difficulties.
+              </p>
+            </div>
+          </article>
+
+          <article>
+            <span>04</span>
+            <div>
+              <h3>Check your progress</h3>
+              <p>
+                Use monthly mock assessments to identify
+                gaps and plan your next round of practice.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section faq-grid" id="faq">
+      <div>
+        <span class="eyebrow">BEFORE YOU BEGIN</span>
+        <h2>Good questions.<br>Clear answers.</h2>
+        <p>
+          Still unsure where to start?<br>
+          <a class="text-link" href="contact.html">Talk to us →</a>
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <details open>
+          <summary>Do I need any coding experience?</summary>
+          <p>
+            No. Java foundations starts with programming basics.
+            You need a laptop or desktop, an internet connection,
+            and time to practise.
+          </p>
+        </details>
+
+        <details>
+          <summary>Are the classes online or offline?</summary>
+          <p>
+            All classes are live and online. Join from any city.
+            Contact us for the meeting platform and joining instructions.
+          </p>
+        </details>
+
+        <details>
+          <summary>What does the weekly schedule look like?</summary>
+          <p>
+            Three live online classes each week, with an assignment
+            after every class and personal TA support at weekends.
+            Call us for batch timings, teaching language, and course length.
+          </p>
+        </details>
+
+        <details>
+          <summary>Do I have to take every course?</summary>
+          <p>
+            No. Choose an individual course or take all seven
+            in the complete package for ₹16,749.
+            The individual offer fees total ₹33,493,
+            so the package saves ₹16,744—approximately 50%.
+          </p>
+          <a class="text-link" href="courses.html#package">
+            Explore the complete package →
+          </a>
+        </details>
+
+        <details>
+          <summary>What do the mentor credits include?</summary>
+          <p>
+            Each course includes three complimentary mentor-session
+            credits for additional guidance. Weekend TA support
+            is separate. The seven-course package includes 21 credits.
+            Call us to confirm session length, booking arrangements,
+            and credit validity.
+          </p>
+        </details>
+
+        <details>
+          <summary>Where can I see the curriculum?</summary>
+          <p>
+            Request the detailed curriculum directly from us.
+            We’ll discuss the learning plan, course length,
+            and starting level before enrolment.
+          </p>
+          <a class="text-link" href="contact.html?intent=curriculum">
+            Request curriculum →
+          </a>
+        </details>
+
+        <details>
+          <summary>Is AI integration included?</summary>
+          <p>
+            AI integration is not currently included in the offering.
+            Contact us about the current curriculum and future updates.
+          </p>
+        </details>
+
+        <details>
+          <summary>How do I enrol, and what about refunds?</summary>
+          <p>
+            Send an enquiry first to discuss course fit and availability.
+            Confirm the total fee and get the applicable payment and
+            refund conditions in writing before paying.
+            An enquiry or demo request does not confirm admission.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section class="wrap end-cta">
+      <div>
+        <span class="eyebrow">YOUR FIRST STEP STARTS HERE</span>
+        <h2>
+          You don’t need to know how to code.<br>
+          You just need a place to start.
+        </h2>
+        <p>
+          Talk to us about your experience, your goals,
+          and the right first course.
+        </p>
+      </div>
+      <a class="button light" href="contact.html?intent=demo">
+        Request a free demo →
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-top">
+      <div>
+        <a class="brand" href="index.html">
           <span class="brand-icon">&lt;/&gt;</span>
           <span>Codrax<span class="brand-sub">ACADEMY</span></span>
         </a>
-        <button class="menu-button" aria-expanded="false" aria-controls="navigation">Menu ☰</button>
-        <nav id="navigation" aria-label="Main navigation">
-  <a href="courses.html">Our courses</a>
-  <a href="index.html#benefits">Why Codrax</a>
-  <a href="index.html#faq">FAQs</a>
-  <a class="button small" href="contact.html?intent=demo">
-    Request a free demo <span>→</span>
-  </a>
-</nav>
+        <p>
+          Start with understanding.<br>
+          Grow with every line of code.
+        </p>
       </div>
-    </header>
 
-    <main id="main">
-
-      <section class="hero">
-        <div class="wrap hero-grid">
-          <div class="hero-copy">
-            <div class="pill">
-  <span class="dot"></span>
-  BUILD YOUR PROGRAMMING FOUNDATION
-</div>
-            <h1>
-              Your first line of code.<br>
-              <em>A whole new<br>way to think.</em>
-            </h1>
-            <p>Three live online classes each week. Assignments after every class. Personal TA support every weekend. Build your programming foundation with guidance that goes beyond the classroom.</p>
-            <div class="actions">
-              <a class="button" href="contact.html?intent=demo">Request a free demo →</a>
-              <a class="text-link" href="courses.html">Explore courses &amp; fees →</a>
-            </div>
-            <div class="hero-notes">
-              <span>✓ Completely online</span>
-              <span>✓ 3 classes / week</span>
-              <span>✓ Weekend TA support</span>
-            </div>
-          </div>
-
-          <div class="hero-visual">
-            <div class="visual-heading">
-              <span>SMALL STEPS. REAL UNDERSTANDING.</span>
-              <span>01 / START</span>
-            </div>
-
-            <div class="editor">
-              <div class="editor-bar">
-                <span class="dots">● ● ●</span>
-                <span>HelloFuture.java</span>
-                <span>JAVA</span>
-              </div>
-              <div class="code">
-                <div><i>1</i><span class="muted-code">// Every developer starts somewhere.</span></div>
-                <div><i>2</i><span><b>public class</b> HelloFuture {</span></div>
-                <div><i>3</i><span>  <b>public static void</b> main(String[] args) {</span></div>
-                <div><i>4</i><span>    System.out.println(<strong>"I can build this."</strong>);</span></div>
-                <div><i>5</i><span>  }</span></div>
-                <div><i>6</i><span>}</span></div>
-              </div>
-              <div class="terminal">
-                <span>OUTPUT</span>
-                <p>› I can build this.<span class="cursor">▍</span></p>
-              </div>
-            </div>
-
-            <div class="visual-bottom">
-              <span class="round-arrow">→</span>
-              <p>Understand it. Write it.<br><strong>Make it your own.</strong></p>
-              <div class="visual-tag">From curious<br>to confident.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="wrap section" id="benefits">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">THE CODRAX DIFFERENCE</span>
-            <h2>Teaching is the start.<br>Support keeps you moving.</h2>
-          </div>
-          <p>A complete online learning routine built around<br>classes, independent practice, and personal guidance.</p>
-        </div>
-
-        <div class="benefit-grid">
-          <article>
-            <span class="eyebrow">01 / LEARN</span>
-            <h3>3 live online classes<br>every week</h3>
-            <p>A structured schedule with space between classes to practise and improve your skills.</p>
-          </article>
-          <article>
-            <span class="eyebrow">02 / PRACTISE</span>
-            <h3>Assignments after<br>every class</h3>
-            <p>Turn each lesson into practice. Build your weekly routine around solving problems yourself.</p>
-          </article>
-          <article>
-            <span class="eyebrow">03 / GET UNSTUCK</span>
-            <h3>Personal TA support<br>every weekend</h3>
-            <p>Get help with doubts, assignment difficulties, and understanding your mistakes from a teaching assistant.</p>
-          </article>
-          <article>
-            <span class="eyebrow">04 / FIND DIRECTION</span>
-            <h3>3 complimentary<br>mentor-session credits</h3>
-            <p>Included with each course for additional guidance alongside live classes and weekend TA support.</p>
-          </article>
-          <article>
-            <span class="eyebrow">05 / CHECK YOUR PROGRESS</span>
-            <h3>A mock assessment<br>every month</h3>
-            <p>Check your understanding, recognise gaps, and focus your next round of practice during your active programme.</p>
-          </article>
-          <article>
-            <span class="eyebrow">06 / BUILD</span>
-            <h3>Hands-on<br>projects</h3>
-            <p>Apply what you learn to practical projects. Build, test, and explain your work as you grow your programming skills.</p>
-          </article>
-        </div>
-
-        <p class="small-text benefit-note">Call us to discuss the batch schedule, TA arrangements, mentor-session length and credit validity, and mock assessment format.</p>
-      </section>
-
-      <section class="wrap section" id="path">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">A CLEAR PLACE TO BEGIN</span>
-            <h2>One foundation.<br>More possibilities.</h2>
-          </div>
-          <p>You don’t have to learn everything at once.<br>Start with Java, then choose your next step.</p>
-        </div>
-
-        <div class="path-grid">
-          <article class="path-card featured">
-            <div class="card-top">
-              <span class="step">01</span>
-              <span class="badge">START HERE</span>
-            </div>
-            <h3>Programming<br>Foundations</h3>
-            <p>Learn to think through a problem and turn your ideas into working Java code.</p>
-            <ul>
-              <li>Build confidence writing your own code</li>
-              <li>Practise after every class</li>
-              <li>Get support when you need it</li>
-            </ul>
-            <div class="course-meta">
-              <span>Java foundations</span>
-              <strong>₹5,999</strong>
-            </div>
-            <a class="button" href="course-java.html">View the Java course →</a>
-          </article>
-
-          <article class="path-card">
-            <div class="card-top">
-              <span class="step">02</span>
-              <span class="label">BUILD ON YOUR BASICS</span>
-            </div>
-            <h3>Data &amp;<br>Problem-solving</h3>
-            <p>Organise information, strengthen your logic, and learn how software stores data.</p>
-            <ul>
-              <li>Develop a consistent practice routine</li>
-              <li>Apply your skills to useful problems</li>
-              <li>Check progress through monthly mocks</li>
-            </ul>
-            <div class="card-bottom">
-              <span>Separate courses · Choose your next step</span>
-              <a class="text-link" href="courses.html#data">Explore these courses →</a>
-            </div>
-          </article>
-
-          <article class="path-card">
-            <div class="card-top">
-              <span class="step">03</span>
-              <span class="label">PUT IT TOGETHER</span>
-            </div>
-            <h3>Applications &amp;<br>Backend Development</h3>
-            <p>Connect your programming skills to the applications people use every day.</p>
-            <ul>
-              <li>Bring your skills together in projects</li>
-              <li>Build applications you can explain</li>
-              <li>Discuss your next steps with a mentor</li>
-            </ul>
-            <div class="card-bottom">
-              <span>For learners with programming basics</span>
-              <a class="text-link" href="courses.html#applications">Explore these courses →</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="wrap package-banner" id="package">
-        <div>
-          <span class="eyebrow">ALL SEVEN COURSES. ONE ENROLMENT.</span>
-          <h2>One foundation.<br>A complete learning journey.</h2>
-          <p>Choose the complete package and grow from programming foundations into application development, with structured practice and personal support.</p>
-          <div class="package-tags">
-            <span>7 courses</span>
-            <span>100% online</span>
-            <span>Mentor + TA support</span>
-          </div>
-        </div>
-        <div class="package-price">
-          <span>COMPLETE LEARNING PACKAGE</span>
-          <strong>₹27,999</strong>
-          <p>₹33,993 when purchased individually</p>
-          <b>Save ₹5,994</b>
-          <a class="button light" href="package.html">Explore the complete package →</a>
-          <small>Call us for the learning sequence and programme schedule.</small>
-        </div>
-      </section>
-
-      <section class="practice-section" id="practice">
-        <div class="wrap practice-grid">
-          <div>
-            <span class="eyebrow">A LITTLE LESS SCROLLING. A LITTLE MORE THINKING.</span>
-            <h2>Try your first<br>coding moment.</h2>
-            <p>A loop repeats a task. Here, Java starts at 1, keeps going while the number is at most 3, and adds 1 each time.</p>
-            <p class="practice-question">What do you think this program prints?</p>
-            <p class="small-text">A short interactive example. No signup needed.</p>
-          </div>
-
-          <div class="exercise">
-            <div class="exercise-top">
-              <span>JAVA BASICS / LOOPS</span>
-              <span>01</span>
-            </div>
-            <pre><code><b>for</b> (int i = 1; i &lt;= 3; i++) {
-    System.out.println(i);
-}</code></pre>
-            <div class="answer-options" role="group" aria-label="Choose the output">
-              <button data-answer="wrong">0, 1, 2</button>
-              <button data-answer="right">1, 2, 3</button>
-              <button data-answer="wrong">1, 2, 3, 4</button>
-            </div>
-            <p id="answer-feedback" role="status">Choose an answer to see the explanation.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="wrap section" id="projects">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">LEARNING WITH A PURPOSE</span>
-            <h2>Turn concepts into<br>something you can show.</h2>
-          </div>
-          <p>Illustrative project ideas for your learning journey.<br>Projects grow as your skills grow.</p>
-        </div>
-
-        <div class="project-grid">
-          <article class="project-card">
-            <div class="project-art marks">
-              <div class="mini-window">
-                <span>STUDENT MARKS · EXAMPLE</span>
-                <div class="score-row"><span>Java</span><b>85 / 100</b></div>
-                <div class="bar"><span style="width:85%"></span></div>
-                <div class="score-row"><span>SQL</span><b>92 / 100</b></div>
-                <div class="bar"><span style="width:92%"></span></div>
-                <div class="score-total">Average <b>88.5%</b></div>
-              </div>
-            </div>
-            <div class="project-copy">
-              <span class="eyebrow">JAVA · LOGIC</span>
-              <h3>Student marks calculator</h3>
-              <p>Use variables, conditions, and methods to calculate marks and explain the result.</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-art library">
-              <div class="mini-window">
-                <span>LIBRARY · EXAMPLE</span>
-                <div class="book-row"><i>01</i><span>Java Fundamentals</span><b>Available</b></div>
-                <div class="book-row"><i>02</i><span>Database Essentials</span><b class="issued">Issued</b></div>
-                <div class="book-row"><i>03</i><span>Learning to Build</span><b>Available</b></div>
-              </div>
-            </div>
-            <div class="project-copy">
-              <span class="eyebrow">JAVA · SQL</span>
-              <h3>Library record manager</h3>
-              <p>Model books and borrowers, store records, and write queries to find what you need.</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-art api">
-              <div class="mini-window">
-                <span>BACKEND · EXAMPLE</span>
-                <div class="api-route"><b>GET</b> /api/tasks</div>
-                <pre>{ "title": "Practice Java",
-  "completed": true }</pre>
-                <div class="status-ok">● 200 OK</div>
-              </div>
-            </div>
-            <div class="project-copy">
-              <span class="eyebrow">SPRING BOOT · REST APIs</span>
-              <h3>Study task manager</h3>
-              <p>Build an API to create tasks, update progress, and connect an application to a database.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="how-section" id="how-it-works">
-        <div class="wrap how-grid">
-          <div>
-            <span class="eyebrow">A ROUTINE YOU CAN GROW WITH</span>
-            <h2>Learn together.<br>Practise yourself.<br>Ask your questions.</h2>
-            <p>Three class days each week, assignments after every class, personal weekend TA support, and a monthly mock to check your progress.</p>
-            <a class="text-link" href="contact.html">Ask about batches →</a>
-          </div>
-
-          <div class="steps">
-            <article>
-              <span>01</span>
-              <div>
-                <h3>Understand the concept</h3>
-                <p>Join three live online classes each week and work through clear explanations with coding examples.</p>
-              </div>
-            </article>
-            <article>
-              <span>02</span>
-              <div>
-                <h3>Put it into practice</h3>
-                <p>Complete the assignment after each class. Use the remaining time in your week to practise and improve your skills.</p>
-              </div>
-            </article>
-            <article>
-              <span>03</span>
-              <div>
-                <h3>Clear your doubts</h3>
-                <p>Get personal teaching assistant support every weekend for doubts, assignment difficulties, and understanding mistakes.</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="wrap section faq-grid" id="faq">
-        <div>
-          <span class="eyebrow">BEFORE YOU BEGIN</span>
-          <h2>Good questions.<br>Clear answers.</h2>
-          <p>Still unsure where to start?<br><a class="text-link" href="contact.html">Talk to us →</a></p>
-        </div>
-
-        <div class="faq-list">
-          <details open>
-            <summary>Do I need any coding experience?</summary>
-            <p>No. The Java foundations course starts with programming basics. You’ll need a laptop or desktop, an internet connection, and time to practise.</p>
-          </details>
-          <details>
-            <summary>Are the classes online or offline?</summary>
-            <p>Classes are live and online. You can join from any city. Contact us for the meeting platform and joining instructions.</p>
-          </details>
-          <details>
-            <summary>What are the class timings?</summary>
-            <p>Classes are completely online and take place three times a week. You receive an assignment after every class and personal TA support at the weekend. Call us for batch timings, teaching language, course length, and the full schedule.</p>
-          </details>
-          <details>
-            <summary>Do I have to take every course?</summary>
-            <p>No. Choose an individual course, or take the complete seven-course package for ₹27,999. The individual courses total ₹33,993, so the package saves ₹5,994. Call us to discuss the learning sequence and schedule.</p>
-          </details>
-          <details>
-            <summary>What do the mentor credits include?</summary>
-            <p>Each course includes three complimentary mentor-session credits for additional guidance. Weekend TA support is separate. The seven-course package includes 21 credits in total. Call us to confirm session length, booking arrangements, and credit validity.</p>
-          </details>
-          <details>
-            <summary>Where can I see the curriculum?</summary>
-            <p>Request the detailed curriculum directly from us. We’ll discuss the learning plan, course length, and starting level before enrolment.</p>
-            <a class="text-link" href="contact.html?intent=curriculum">Request curriculum →</a>
-          </details>
-          <details>
-            <summary>Is AI integration included?</summary>
-            <p>The current courses focus on programming, databases, and application development. AI integration is not included in the current offering. Ask us about future curriculum updates.</p>
-          </details>
-          <details>
-            <summary>How do I enrol, and what about refunds?</summary>
-            <p>Send an enquiry first. We’ll discuss course fit and batch availability. Confirm the total fee and get the applicable payment and refund conditions in writing before paying. An enquiry or demo request does not confirm admission.</p>
-          </details>
-        </div>
-      </section>
-
-      <section class="wrap end-cta">
-        <div>
-          <span class="eyebrow">YOUR FIRST STEP STARTS HERE</span>
-          <h2>You don’t need to know how to code.<br>You just need a place to start.</h2>
-          <p>Talk to us about your experience, your goals, and the right first course.</p>
-        </div>
-        <a class="button light" href="contact.html?intent=demo">Request a free demo →</a>
-      </section>
-
-    </main>
-
-    <footer>
-      <div class="wrap footer-top">
-        <div>
-          <a class="brand" href="index.html">
-            <span class="brand-icon">&lt;/&gt;</span>
-            <span>Codrax<span class="brand-sub">ACADEMY</span></span>
-          </a>
-          <p>Start with understanding.<br>Grow with every line of code.</p>
-        </div>
-        <div>
-          <h3>Explore</h3>
-          <a href="courses.html">Courses &amp; fees</a>
-          <a href="index.html#practice">Try a Java lesson</a>
-          <a href="contact.html">Get in touch</a>
-        </div>
-        <div>
-          <h3>Let’s talk</h3>
-          <a href="mailto:codestart9989@gmail.com">codestart9989@gmail.com</a>
-          <a href="tel:+917075405512">+91 70754 05512</a>
-          <p>Live online classes · Learn from anywhere</p>
-        </div>
+      <div>
+        <h3>Explore</h3>
+        <a href="courses.html">Courses &amp; fees</a>
+        <a href="courses.html#package">Complete learning package</a>
+        <a href="#practice">Try a Java lesson</a>
+        <a href="contact.html">Get in touch</a>
       </div>
-      <div class="wrap footer-bottom">
-        <span>© 2026 Codrax Academy</span>
-        <div>
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms &amp; fee information</a>
-        </div>
+
+      <div>
+        <h3>Let’s talk</h3>
+        <a href="mailto:codestart9989@gmail.com">
+          codestart9989@gmail.com
+        </a>
+        <a href="tel:+917075405512">+91 70754 05512</a>
+        <p>Live online classes · Learn from anywhere</p>
       </div>
-    </footer>
-  </body>
+    </div>
+
+    <div class="wrap footer-bottom">
+      <span>© 2026 Codrax Academy</span>
+      <div>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms &amp; fee information</a>
+      </div>
+    </div>
+  </footer>
+</body>
 </html>
