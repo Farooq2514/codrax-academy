@@ -245,76 +245,430 @@
       </div>
     </section>
 
-    <section class="wrap section" id="benefits">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">THE CODRAX DIFFERENCE</span>
-          <h2>Teaching is the start.<br>Support keeps you moving.</h2>
-        </div>
-      
-      </div>
+<style>
+  /* Why Codrax: visual learning and support layout */
+  #benefits {
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
 
-      <div class="benefit-grid">
-        <article>
-          <span class="eyebrow">01 / LEARN</span>
-          <h3>3 live online classes<br>every week</h3>
-          <p>
-            A structured schedule with space between classes
-            to practise and improve your skills.
-          </p>
-        </article>
+  .cx-benefits-heading {
+    margin-bottom: 28px;
+  }
 
-        <article>
-          <span class="eyebrow">02 / PRACTISE</span>
-          <h3>Assignments after<br>every class</h3>
-          <p>
-            Turn each lesson into practice. Build your weekly
-            routine around solving problems yourself.
-          </p>
-        </article>
+  .cx-benefits-heading h2 {
+    max-width: 700px;
+    margin-bottom: 0;
+    font-size: clamp(30px, 3.8vw, 46px);
+  }
 
-        <article>
-          <span class="eyebrow">03 / GET UNSTUCK</span>
-          <h3>Personal TA support<br>every weekend</h3>
-          <p>
-            Get help with doubts, assignment difficulties,
-            and understanding mistakes from a teaching assistant.
-          </p>
-        </article>
+  .cx-benefits-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: 22px;
+    align-items: stretch;
+  }
 
-        <article>
-          <span class="eyebrow">04 / FIND DIRECTION</span>
-          <h3>3 complimentary<br>mentor-session credits</h3>
-          <p>
-            Included with each course for additional guidance
-            alongside live classes and weekend TA support.
-          </p>
-        </article>
+  .cx-week {
+    min-width: 0;
+    padding: 30px;
+    border-radius: 16px;
+    background: #142e4e;
+    color: #ffffff;
+  }
 
-        <article>
-          <span class="eyebrow">05 / CHECK YOUR PROGRESS</span>
-          <h3>A mock assessment<br>every month</h3>
-          <p>
-            Check your understanding, recognise gaps, and focus
-            your next round of practice during your active programme.
-          </p>
-        </article>
+  .cx-week-label {
+    display: inline-block;
+    padding: 6px 11px;
+    border: 1px solid #60788e;
+    border-radius: 20px;
+    color: #d2e5dc;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
 
-        <article>
-          <span class="eyebrow">06 / BUILD</span>
-          <h3>Hands-on<br>projects</h3>
-          <p>
-            Apply what you learn to practical work.
-            Build, test, and explain your approach.
-          </p>
-        </article>
-      </div>
+  .cx-week h3 {
+    margin: 22px 0 12px;
+    color: #ffffff;
+    font-size: 31px;
+  }
 
-      <p class="small-text benefit-note">
-        Call us to discuss the batch schedule, TA arrangements,
-        mentor-session length and credit validity, and mock format.
+  .cx-week > p {
+    margin-bottom: 24px;
+    color: #c5d3df;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .cx-week-days {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .cx-day {
+    padding: 17px 8px;
+    border: 1px solid #526e87;
+    border-radius: 10px;
+    background: #203c57;
+    text-align: center;
+  }
+
+  .cx-day span {
+    display: block;
+    margin-bottom: 7px;
+    color: #b9ccdb;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .cx-day strong {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+  }
+
+  .cx-week-routine {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #486178;
+  }
+
+  .cx-routine-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+  }
+
+  .cx-routine-dot {
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    margin-top: 7px;
+    border-radius: 50%;
+    background: #b8dfc5;
+  }
+
+  .cx-routine-row strong {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+  }
+
+  .cx-routine-row small {
+    display: block;
+    margin-top: 3px;
+    color: #bdcedc;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .cx-week .cx-week-note {
+    margin: 18px 0 0;
+    color: #b9ccdb;
+    font-size: 11px;
+  }
+
+  .cx-support-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .cx-support-card {
+    min-width: 0;
+    padding: 24px;
+    border: 1px solid #dce5df;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+
+  .cx-support-card.cx-green {
+    background: #edf5ec;
+    border-color: #c9ddca;
+  }
+
+  .cx-support-card.cx-blue {
+    background: #edf2fc;
+    border-color: #d3dff5;
+  }
+
+  .cx-support-card.cx-warm {
+    background: #faf3e8;
+    border-color: #e9ddc8;
+  }
+
+  .cx-support-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #2859e8;
+    box-shadow: 0 3px 12px rgba(20, 46, 78, 0.05);
+  }
+
+  .cx-support-icon svg {
+    display: block;
+    width: 25px;
+    height: 25px;
+  }
+
+  .cx-support-card h3 {
+    margin-bottom: 10px;
+    color: #142e4e;
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .cx-support-card p {
+    margin-bottom: 0;
+    color: #607081;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .cx-support-tag {
+    display: inline-block;
+    margin-top: 17px;
+    color: #416f60;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .cx-benefits-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 22px;
+    padding: 20px 24px;
+    border: 1px solid #dce5df;
+    border-radius: 12px;
+    background: #f1f5ef;
+  }
+
+  .cx-benefits-footer p {
+    max-width: 680px;
+    margin: 0;
+    color: #53665a;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .cx-benefits-footer .text-link {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 950px) {
+    .cx-benefits-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 550px) {
+    #benefits {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    .cx-week {
+      padding: 24px;
+    }
+
+    .cx-week h3 {
+      font-size: 28px;
+    }
+
+    .cx-support-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .cx-support-card {
+      padding: 23px;
+    }
+
+    .cx-benefits-footer {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 14px;
+      padding: 21px;
+    }
+  }
+</style>
+
+<section class="wrap section"
+         id="benefits"
+         aria-labelledby="cx-benefits-title">
+
+  <div class="cx-benefits-heading">
+    <span class="eyebrow">THE CODRAX DIFFERENCE</span>
+    <h2 id="cx-benefits-title">
+      A clear routine.<br>
+      Support at every step.
+    </h2>
+  </div>
+
+  <div class="cx-benefits-layout">
+
+    <!-- Featured visual: the weekly learning routine -->
+    <article class="cx-week">
+      <span class="cx-week-label">YOUR LEARNING WEEK</span>
+
+      <h3>3 live classes.<br>Practice in between.</h3>
+
+      <p>
+        Learn together online, apply each lesson yourself,
+        and bring your questions to your weekend TA.
       </p>
-    </section>
+
+      <div class="cx-week-days" aria-label="Three weekly live classes">
+        <div class="cx-day">
+          <span>SESSION 01</span>
+          <strong>Learn</strong>
+        </div>
+        <div class="cx-day">
+          <span>SESSION 02</span>
+          <strong>Apply</strong>
+        </div>
+        <div class="cx-day">
+          <span>SESSION 03</span>
+          <strong>Build</strong>
+        </div>
+      </div>
+
+      <div class="cx-week-routine">
+        <div class="cx-routine-row">
+          <span class="cx-routine-dot" aria-hidden="true"></span>
+          <div>
+            <strong>After every class</strong>
+            <small>An assignment to put the lesson into practice.</small>
+          </div>
+        </div>
+
+        <div class="cx-routine-row">
+          <span class="cx-routine-dot" aria-hidden="true"></span>
+          <div>
+            <strong>Between sessions</strong>
+            <small>Time to solve problems and improve independently.</small>
+          </div>
+        </div>
+
+        <div class="cx-routine-row">
+          <span class="cx-routine-dot" aria-hidden="true"></span>
+          <div>
+            <strong>At the weekend</strong>
+            <small>Personal TA support to help you get unstuck.</small>
+          </div>
+        </div>
+      </div>
+
+      <p class="cx-week-note">
+        Completely online · Contact us for your batch timetable.
+      </p>
+    </article>
+
+    <!-- Compact support cards -->
+    <div class="cx-support-grid">
+
+      <article class="cx-support-card cx-green">
+        <span class="cx-support-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 13v-1a8 8 0 0 1 16 0v1"/>
+            <rect x="3" y="12" width="4" height="7" rx="2"/>
+            <rect x="17" y="12" width="4" height="7" rx="2"/>
+            <path d="M19 19c0 2-3 2-6 2"/>
+          </svg>
+        </span>
+
+        <h3>Personal TA support</h3>
+        <p>
+          Work through doubts, assignment difficulties,
+          and mistakes with help every weekend.
+        </p>
+        <span class="cx-support-tag">You have someone to ask</span>
+      </article>
+
+      <article class="cx-support-card cx-blue">
+        <span class="cx-support-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="7" r="3"/>
+            <path d="M3 20v-2a6 6 0 0 1 10-4"/>
+            <path d="M15 9h6v8h-3l-3 3V9Z"/>
+          </svg>
+        </span>
+
+        <h3>3 mentor credits</h3>
+        <p>
+          Complimentary session credits with each course
+          for guidance on your learning and next steps.
+        </p>
+        <span class="cx-support-tag">Direction alongside practice</span>
+      </article>
+
+      <article class="cx-support-card cx-warm">
+        <span class="cx-support-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="4" width="14" height="17" rx="2"/>
+            <path d="M9 4V2h6v2M9 10h6M9 14h3M9 18h6"/>
+          </svg>
+        </span>
+
+        <h3>Monthly mocks</h3>
+        <p>
+          Check what you understand, identify gaps,
+          and focus your next round of practice.
+        </p>
+        <span class="cx-support-tag">See where to improve</span>
+      </article>
+
+      <article class="cx-support-card">
+        <span class="cx-support-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="13" rx="2"/>
+            <path d="M8 21h8M12 17v4M9 8l-3 3 3 3M15 8l3 3-3 3"/>
+          </svg>
+        </span>
+
+        <h3>Hands-on projects</h3>
+        <p>
+          Turn concepts into practical work you can
+          build, test, demonstrate, and explain.
+        </p>
+        <span class="cx-support-tag">Make your learning visible</span>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="cx-benefits-footer">
+    <p>
+      Find out how the support works for your course.
+      Ask about TA slots, mentor-session length, credit validity,
+      and the monthly mock format.
+    </p>
+    <a class="text-link" href="contact.html?intent=demo">
+      Talk to us →
+    </a>
+  </div>
+
+</section>
 <style>
   /* Reduce spacing around the new homepage section. */
   #benefits {
