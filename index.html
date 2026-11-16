@@ -318,7 +318,403 @@
         mentor-session length and credit validity, and mock format.
       </p>
     </section>
+<style>
+  /* Reduce spacing around the new homepage section. */
+  #benefits {
+    padding-bottom: 35px;
+  }
 
+  #path {
+    padding-top: 45px;
+  }
+
+  .join-section {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+
+  .join-intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-bottom: 30px;
+  }
+
+  .join-intro h2 {
+    margin-bottom: 0;
+    font-size: clamp(30px, 3.5vw, 44px);
+  }
+
+  .join-intro > p {
+    max-width: 380px;
+    margin-bottom: 3px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .join-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .join-card {
+    min-width: 0;
+    padding: 28px;
+    border: 1px solid #dce5df;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+
+  .join-card:first-child {
+    background: #edf5ec;
+    border-color: #bed2bd;
+  }
+
+  .join-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .join-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #e8eff9;
+    color: #2859e8;
+  }
+
+  .join-card:first-child .join-icon {
+    background: #d6e8d6;
+    color: #355d40;
+  }
+
+  .join-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .join-card-tag {
+    color: #607769;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .join-card h3 {
+    margin-bottom: 12px;
+    color: #142e4e;
+    font-size: 25px;
+  }
+
+  .join-card p {
+    margin-bottom: 20px;
+    color: #607081;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .join-card .join-outcome {
+    margin-bottom: 0;
+    padding-top: 16px;
+    border-top: 1px solid #dce5df;
+    color: #355647;
+    font-size: 13px;
+  }
+
+  .join-outcome strong {
+    color: #142e4e;
+  }
+
+  .join-support {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 35px;
+    margin-top: 25px;
+    padding: 32px;
+    border-radius: 14px;
+    background: #142e4e;
+    color: #ffffff;
+  }
+
+  .join-support > div {
+    min-width: 0;
+  }
+
+  .join-support .eyebrow {
+    color: #c1ddcb;
+  }
+
+  .join-support h3 {
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 29px;
+  }
+
+  .join-support p {
+    margin-bottom: 22px;
+    color: #c5d3df;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .join-support-list {
+    display: grid;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .join-support-list li {
+    position: relative;
+    padding-left: 25px;
+  }
+
+  .join-support-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #bfe3c8;
+    font-weight: 700;
+  }
+
+  .join-support-list strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #ffffff;
+    font-size: 14px;
+  }
+
+  .join-support-list span {
+    display: block;
+    color: #c5d3df;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 700px) {
+    .join-intro {
+      display: block;
+    }
+
+    .join-intro > p {
+      margin-top: 18px;
+      max-width: none;
+    }
+
+    .join-grid,
+    .join-support {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .join-card {
+      padding: 24px;
+    }
+
+    .join-support {
+      gap: 25px;
+      padding: 25px;
+    }
+
+    .join-support .button {
+      white-space: normal;
+      text-align: center;
+    }
+
+    #benefits {
+      padding-bottom: 20px;
+    }
+
+    .join-section {
+      padding-top: 25px;
+      padding-bottom: 20px;
+    }
+
+    #path {
+      padding-top: 35px;
+    }
+  }
+</style>
+
+<section class="wrap join-section"
+         id="who-can-join"
+         aria-labelledby="join-heading">
+
+  <div class="join-intro">
+    <div>
+      <span class="eyebrow">DIFFERENT BACKGROUNDS. A PLACE TO BEGIN.</span>
+      <h2 id="join-heading">
+        You bring the curiosity.<br>
+        We help you take the next step.
+      </h2>
+    </div>
+
+    <p>
+      Starting from zero, studying alongside college, or exploring
+      a new direction? Find a learning path that matches your
+      experience and goals.
+    </p>
+  </div>
+
+  <div class="join-grid">
+    <article class="join-card">
+      <div class="join-card-top">
+        <span class="join-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/>
+          </svg>
+        </span>
+        <span class="join-card-tag">START FROM THE BASICS</span>
+      </div>
+
+      <h3>Complete beginners</h3>
+      <p>
+        Never written a line of code? Begin with clear explanations,
+        guided examples, and small tasks that help you understand
+        how programming works.
+      </p>
+      <p class="join-outcome">
+        <strong>Your next step:</strong>
+        Build confidence writing your first programs.
+      </p>
+    </article>
+
+    <article class="join-card">
+      <div class="join-card-top">
+        <span class="join-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="m2 9 10-5 10 5-10 5-10-5Z"/>
+            <path d="M6 11v6c4 3 8 3 12 0v-6M22 9v7"/>
+          </svg>
+        </span>
+        <span class="join-card-tag">BUILD BEYOND THE CLASSROOM</span>
+      </div>
+
+      <h3>Students &amp; graduates</h3>
+      <p>
+        Turn what you study into practical skills. Strengthen your
+        understanding, practise consistently, and build projects
+        you can demonstrate and explain.
+      </p>
+      <p class="join-outcome">
+        <strong>Your next step:</strong>
+        Connect your knowledge to working applications.
+      </p>
+    </article>
+
+    <article class="join-card">
+      <div class="join-card-top">
+        <span class="join-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="7" width="18" height="13" rx="2"/>
+            <path d="M8 7V4h8v3M3 12h18M10 12v3h4v-3"/>
+          </svg>
+        </span>
+        <span class="join-card-tag">EXPLORE A NEW DIRECTION</span>
+      </div>
+
+      <h3>Non-IT learners</h3>
+      <p>
+        You don’t need a computer science background to begin
+        learning programming. Start at the right level and
+        develop your understanding one step at a time.
+      </p>
+      <p class="join-outcome">
+        <strong>Your next step:</strong>
+        Build a technical foundation without skipping the basics.
+      </p>
+    </article>
+
+    <article class="join-card">
+      <div class="join-card-top">
+        <span class="join-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 2"/>
+          </svg>
+        </span>
+        <span class="join-card-tag">LEARN ALONGSIDE YOUR WORK</span>
+      </div>
+
+      <h3>Working professionals</h3>
+      <p>
+        Build a new skill or strengthen an existing one through
+        a structured learning routine. Discuss your availability
+        with us to find a suitable batch before enrolling.
+      </p>
+      <p class="join-outcome">
+        <strong>Your next step:</strong>
+        Choose focused learning that fits your commitments.
+      </p>
+    </article>
+  </div>
+
+  <div class="join-support">
+    <div>
+      <span class="eyebrow">MORE THAN JUST AN ONLINE CLASS</span>
+      <h3>Learn online.<br>Stay personally supported.</h3>
+      <p>
+        At Codrax Academy, live teaching is one part of the journey.
+        Regular practice, weekend help, and mentor guidance
+        support you as you build your skills.
+      </p>
+
+      <a class="button light" href="contact.html?intent=demo">
+        Find your starting point →
+      </a>
+    </div>
+
+    <ul class="join-support-list">
+      <li>
+        <strong>Choose a suitable online batch</strong>
+        <span>
+          Monday, Wednesday, and Friday, or Tuesday, Thursday,
+          and Saturday. Contact us to confirm available timings.
+        </span>
+      </li>
+
+      <li>
+        <strong>Practise between live sessions</strong>
+        <span>
+          An assignment after every class helps you put
+          your learning into action.
+        </span>
+      </li>
+
+      <li>
+        <strong>Get help at the weekend</strong>
+        <span>
+          Personal TA support helps you work through doubts,
+          assignment difficulties, and mistakes.
+        </span>
+      </li>
+
+      <li>
+        <strong>Discuss your next step with a mentor</strong>
+        <span>
+          Three complimentary mentor-session credits per course
+          for additional guidance. Ask us about booking and validity.
+        </span>
+      </li>
+    </ul>
+  </div>
+</section>
     <section class="wrap section" id="path">
       <div class="section-heading">
         <div>
