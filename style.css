@@ -1589,3 +1589,23 @@ h1, h2, h3, p, a {
 .codrax-chat[hidden] {
   display: none !important;
 }
+/* Tighten the gap between the hero and Why Codrax. */
+.hero {
+  margin-bottom: 0;
+  padding-bottom: 40px;
+}
+
+#benefits {
+  margin-top: 0;
+  padding-top: 40px;
+}
+
+@media (max-width: 780px) {
+  .hero {
+    padding-bottom: 24px;
+  }
+
+  #benefits {
+    padding-top: 28px;
+  }
+}
