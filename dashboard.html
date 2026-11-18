@@ -1129,6 +1129,35 @@
     transition: background-color .2s ease, color .2s ease, border-color .2s ease;
   }
 }
+.access-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 130px 130px;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.access-row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.access-row input {
+  accent-color: var(--blue);
+}
+
+@media (max-width: 600px) {
+  .access-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .access-row strong {
+    grid-column: 1 / -1;
+  }
+}
+
   </style>
 </head>
 
@@ -1694,6 +1723,57 @@ themeToggle.addEventListener("click", () => {
           toast("Storage unavailable. Changes will last only while this page is open.");
         }
       }
+      let accessStudent = "umar";
+db.access ||= {};
+
+function renderAccessControls() {
+  const studentSelect = document.querySelector("#access-student");
+  const accessList = document.querySelector("#access-list");
+
+  if (!studentSelect || !accessList) return;
+
+  accessStudent = studentSelect.value;
+  const student = users[accessStudent];
+
+  const studentLessons = db.lessons.filter(
+    lesson => lesson.batch === student.batch
+  );
+
+  accessList.innerHTML = studentLessons.map(lesson => {
+    const permission = db.access[accessStudent]?.[lesson.id] || {
+      live: true,
+      recording: true
+    };
+
+    return `
+      <article class="access-row">
+        <strong>${esc(lesson.title)}</strong>
+
+        <label>
+          <input type="checkbox"
+                 data-student="${accessStudent}"
+                 data-lesson="${esc(lesson.id)}"
+                 data-resource="live"
+                 ${permission.live ? "checked" : ""}>
+          Live class
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 data-student="${accessStudent}"
+                 data-lesson="${esc(lesson.id)}"
+                 data-resource="recording"
+                 ${permission.recording ? "checked" : ""}>
+          Recording
+        </label>
+      </article>
+    `;
+  }).join("");
+}
+
+function canAccessResource(studentId, lessonId, resource) {
+  return db.access?.[studentId]?.[lessonId]?.[resource] !== false;
+}
 
       function metrics() {
         const list = lessons();
@@ -2183,10 +2263,19 @@ themeToggle.addEventListener("click", () => {
               <div class="recording-placeholder">
                 ${icon("play")}
                 <p>${lesson.ended ? "Session recording" : "Your live classroom"}</p>
-                ${link(
-                  lesson.ended ? lesson.recording : lesson.live,
-                  lesson.ended ? "Watch recording" : "Join live class"
-                )}
+               ${(() => {
+  const resource = lesson.ended ? "recording" : "live";
+  const label = lesson.ended ? "Recording" : "Live class";
+
+  if (!canAccessResource(profile, lesson.id, resource)) {
+    return `<span class="label locked">${icon("lock")} ${label} access not granted</span>`;
+  }
+
+  return link(
+    lesson.ended ? lesson.recording : lesson.live,
+    lesson.ended ? "Watch recording" : "Join live class"
+  );
+})()}
               </div>
 
               <p class="muted" style="font-size:11px;margin:15px 0 0">
@@ -2511,7 +2600,23 @@ themeToggle.addEventListener("click", () => {
         if (!staff()) return overview();
 
         const list = lessons();
+<section class="panel pad">
+  <h2>Student lesson access</h2>
+  <p>Select a student, then choose which lesson resources they can open.</p>
 
+  <label class="field">
+    Student
+    <select id="access-student">
+      <option value="umar">Umar · Java</option>
+      <option value="sara">Sara · DSA</option>
+    </select>
+  </label>
+
+  <div id="access-list"></div>
+  <p class="muted">
+    Demo settings are saved only in this browser. Real access control needs the backend.
+  </p>
+</section>
         const pending = Object.entries(db.submissions).filter(([key, submission]) =>
           submission.status === "submitted" &&
           list.some(lesson =>
@@ -2523,6 +2628,21 @@ themeToggle.addEventListener("click", () => {
           "Manage classroom",
           "Publish links, release assignments and review student work."
         ) + `
+        <section class="panel pad">
+  <h2>Student lesson access</h2>
+  <p>Select a student, then choose which lesson resources they can open.</p>
+
+  <label class="field">
+    Student
+    <select id="access-student">
+      <option value="umar" ${accessStudent === "umar" ? "selected" : ""}>Umar · Java</option>
+      <option value="sara" ${accessStudent === "sara" ? "selected" : ""}>Sara · DSA</option>
+    </select>
+  </label>
+
+  <div id="access-list"></div>
+  <p class="muted">Demo settings are saved only in this browser. Real access control needs the backend.</p>
+</section>
           <section class="panel">
             ${list.map(lesson => `
               <article class="admin-class">
@@ -2690,6 +2810,7 @@ themeToggle.addEventListener("click", () => {
         };
 
         $("#screen").innerHTML = (screens[page] || overview)();
+        if (page === "manage") renderAccessControls();
 
         document.querySelectorAll(
           ".academy-sidebar [data-page], .subnav [data-page], .drawer [data-page]"
@@ -2758,7 +2879,26 @@ themeToggle.addEventListener("click", () => {
         tab = "notes";
         navigate(staff() ? "manage" : "home");
       };
+document.addEventListener("change", event => {
+  if (event.target.id === "access-student") {
+    accessStudent = event.target.value;
+    renderAccessControls();
+    return;
+  }
 
+  const checkbox = event.target.closest("[data-resource]");
+  if (!checkbox || !staff()) return;
+
+  const { student, lesson, resource } = checkbox.dataset;
+
+  db.access[student] ||= {};
+  db.access[student][lesson] ||= { live: true, recording: true };
+  db.access[student][lesson][resource] = checkbox.checked;
+
+  save();
+  renderAccessControls();
+  toast("Student access updated in this browser.");
+});
       document.addEventListener("click", event => {
         const button = event.target.closest("button");
         if (!button) return;
