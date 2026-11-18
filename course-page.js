@@ -33,7 +33,7 @@
       .join("");
 
     const mentorDetail = course.mentorSessions > 0
-      ? `<div><dt>Mentoring</dt><dd>Free credits available</dd></div>`
+      ? `<div><dt>Mentoring</dt><dd>Complimentary credits available</dd></div>`
       : "";
 
     const aliasMessage = alias

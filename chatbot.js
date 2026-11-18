@@ -37,17 +37,20 @@
       `The same four course paths cost ${money(packageData.individualOfferTotal)} ` +
       `at their listed launch fees when purchased separately.\n` +
       `Saving: ${money(packageData.savings)}.\n` +
-      `Mentor sessions: ${packageData.mentorSessions} total.\n\n` +
+      `Complimentary mentor credits are available with eligible learning paths. Ask the academy to confirm what applies to this package.\n\n` +
       "Git & GitHub is included inside Java Backend Development and counted once. " +
       "Confirm the course sequence and overall duration with the academy. " + contact;
   }
 
   function courseReply(course) {
     const mentor = course.mentorSessions
-      ? `${course.mentorSessions} mentor session${course.mentorSessions === 1 ? "" : "s"} included.`
-      : "Mentor sessions are not included in this standalone course.";
+      ? "Complimentary mentor credits may be available with this learning path; confirm availability and booking with the academy."
+      : "Ask the academy whether complimentary mentor credits are available with this course.";
     const topicHighlights = (course.highlights || []).join(", ");
-    return `${course.name}\n${money(course.price)} launch fee per student · ${course.duration}.\n\n` +
+    const fee = course.regularPrice
+      ? `Regular fee ${money(course.regularPrice)} · launch fee ${money(course.price)}`
+      : `Launch fee ${money(course.price)}`;
+    return `${course.name}\n${fee} per student · ${course.duration}.\n\n` +
       `${course.summary}\n${mentor}\n\nSelected topic highlights:\n${topicHighlights}\n\n` +
       "Classes are live online three times a week, with an assignment after every class and weekend TA support. " +
       "Ask the academy to confirm the batch timetable and final outline. " + contact;
@@ -62,7 +65,7 @@
     }
 
     if (/mentor|credit/.test(q)) {
-      return "The Java Backend Development batch includes 1 mentor session. The Complete Developer Package includes 3 mentor sessions total. Standalone DSA, LLD, Git & GitHub, HTML & CSS, HLD and AI & Agents do not include mentor sessions. Weekend TA support is separate. Confirm session length and booking arrangements with the academy.";
+      return "Complimentary mentor credits are available with eligible learning paths. Contact the academy to confirm whether credits apply to your selected course, and to ask about session length, booking and validity. Weekend teaching assistant support is separate.";
     }
 
     if (/teaching assistant|\bta\b|doubt|weekend/.test(q)) {
@@ -134,12 +137,8 @@
   toggle.setAttribute("aria-label", "Open Codrax course assistant");
   toggle.setAttribute("aria-expanded", "false");
   toggle.setAttribute("aria-controls", "codrax-chat");
-  toggle.innerHTML =
-  '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
-  '<rect x="4" y="7" width="16" height="13" rx="4" stroke="currentColor" stroke-width="1.8"/>' +
-  '<path d="M12 3v4M2 12h2M20 12h2M8 13h.01M16 13h.01M9 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
-  '<circle cx="12" cy="3" r="1.5" fill="currentColor"/>' +
-  '</svg><span>Ask Codrax</span>';
+  toggle.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M7 8h10a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3ZM2 12h2m16 0h2"/><circle cx="12" cy="3" r="1"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M9 17h6"/></svg><span>Ask Codrax</span>';
+
   const panel = document.createElement("section");
   panel.id = "codrax-chat";
   panel.className = "codrax-chat";
