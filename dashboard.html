@@ -2600,23 +2600,6 @@ function canAccessResource(studentId, lessonId, resource) {
         if (!staff()) return overview();
 
         const list = lessons();
-<section class="panel pad">
-  <h2>Student lesson access</h2>
-  <p>Select a student, then choose which lesson resources they can open.</p>
-
-  <label class="field">
-    Student
-    <select id="access-student">
-      <option value="umar">Umar · Java</option>
-      <option value="sara">Sara · DSA</option>
-    </select>
-  </label>
-
-  <div id="access-list"></div>
-  <p class="muted">
-    Demo settings are saved only in this browser. Real access control needs the backend.
-  </p>
-</section>
         const pending = Object.entries(db.submissions).filter(([key, submission]) =>
           submission.status === "submitted" &&
           list.some(lesson =>
