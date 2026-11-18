@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>High-Level Design | Codrax Academy</title>
+<meta content="Study system design foundations, scalability, data trade-offs and distributed-system components." name="description"/>
+<meta content="#142e4e" name="theme-color"/>
+<link href="style.css" rel="stylesheet"/>
+<!-- Render the course before attaching the site interactions. -->
+<script defer="" src="course-page.js"></script>
+<script defer="" src="site.js"></script>
+<script defer="" src="course-data.js"></script>
+<script defer="" src="chatbot.js"></script>
+<style>
+    /* Shared styling for the seven individual course pages. */
+    .course-layout {
+      grid-template-columns:
+        minmax(0, 1.5fr) minmax(0, 1fr);
+    }
+
+    .course-layout > * {
+      min-width: 0;
+    }
+
+    .course-heading h1 {
+      overflow-wrap: break-word;
+    }
+
+    .curriculum-panel {
+      padding: 30px;
+      background: #edf4ec;
+      border: 1px solid #d3e2d2;
+      border-radius: 12px;
+    }
+
+    .curriculum-panel h2 {
+      font-size: clamp(27px, 3vw, 36px);
+    }
+
+    .curriculum-panel > p {
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .learning-outcomes {
+      display: grid;
+      gap: 15px;
+      margin: 25px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .learning-outcomes li {
+      position: relative;
+      padding-left: 27px;
+      color: #263f34;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .learning-outcomes li::before {
+      content: "✓";
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #416f60;
+      font-weight: 700;
+    }
+
+    .curriculum-note-text {
+      padding-top: 18px;
+      border-top: 1px solid #cddccc;
+      font-size: 13px !important;
+    }
+
+    .course-support {
+      padding-top: 35px;
+    }
+
+    .support-heading {
+      font-size: 28px;
+    }
+
+    .course-support ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .course-support li {
+      padding: 18px 0;
+      border-bottom: 1px solid #dfe5ea;
+    }
+
+    .course-support strong {
+      display: block;
+      font-size: 15px;
+      color: #182c43;
+    }
+
+    .course-support li span {
+      display: block;
+      margin-top: 6px;
+      color: #607081;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .enrol-card .course-regular-fee {
+      margin-bottom: 8px;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .course-regular-fee del {
+      margin-left: 5px;
+      text-decoration-thickness: 1.5px;
+    }
+
+    .enrol-card .price {
+      color: #142e4e;
+      font-size: 46px;
+      overflow-wrap: anywhere;
+    }
+
+    .enrol-card .course-offer-label {
+      margin: 5px 0 12px;
+      color: #416f60;
+      font-size: 13px;
+    }
+
+    .course-saving {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 6px 11px;
+      background: #e5f1e7;
+      color: #355d40;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .enrol-card dl > div {
+      gap: 15px;
+    }
+
+    .enrol-card dd {
+      margin-left: 0;
+    }
+
+    .bundle-nudge {
+      margin-top: 25px;
+      padding-top: 24px;
+      border-top: 1px solid #dfe5ea;
+    }
+
+    .bundle-nudge h3 {
+      margin-bottom: 12px;
+      font-size: 23px;
+    }
+
+    .bundle-nudge .eyebrow {
+      font-size: 9px;
+    }
+
+    .bundle-nudge p {
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .bundle-comparison del {
+      white-space: nowrap;
+    }
+
+    .bundle-price {
+      display: block;
+      margin: 10px 0;
+      color: #142e4e;
+      font-family: Manrope, sans-serif;
+      font-size: 33px;
+      line-height: 1.2;
+    }
+
+    .bundle-nudge .bundle-saving {
+      color: #416f60;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .course-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+      }
+
+      .enrol-card {
+        position: static;
+      }
+
+      .course-heading h1 {
+        font-size: clamp(34px, 7vw, 48px);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .curriculum-panel,
+      .enrol-card {
+        padding: 23px;
+      }
+
+      .learning-outcomes li {
+        font-size: 14px;
+      }
+
+      .support-heading {
+        font-size: 25px;
+      }
+
+      .enrol-card .price {
+        font-size: 40px;
+      }
+
+      .curriculum-panel .button,
+      .end-cta .button {
+        white-space: normal;
+        text-align: center;
+      }
+    }
+  </style>
+<meta content="Course details | Codrax Academy" property="og:title"/><meta content="Course details | Codrax Academy. Explore live online learning, published fees and course information. Request a free demo from Codrax Academy." property="og:description"/><meta content="website" property="og:type"/><script src="launch-config.js"></script><script defer="" src="launch.js"></script></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap nav">
+<a aria-label="Codrax Academy home" class="brand" href="index.html">
+<span class="brand-icon">&lt;/&gt;</span>
+<span>
+          Codrax
+          <span class="brand-sub">ACADEMY</span>
+</span>
+</a>
+<button aria-controls="navigation" aria-expanded="false" class="menu-button" type="button">
+        Menu ☰
+      </button>
+<nav aria-label="Main navigation" id="navigation">
+<a href="courses.html">Our courses</a>
+<a href="index.html#support-details">Why Codrax</a>
+<a href="index.html#faq">FAQs</a>
+<a class="button small" href="contact.html?intent=demo">Request a free demo</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<div id="course-root"></div>
+<noscript>
+<section class="wrap page-intro">
+<h1>Explore your next course.</h1>
+<p>
+          Enable JavaScript to view this course’s full details,
+          or contact us for the curriculum and fees.
+        </p>
+<a class="button" href="courses.html">
+          View courses and fees →
+        </a>
+<p>
+<a href="tel:+917075405512">
+            Call +91 70754 05512
+          </a>
+</p>
+</section>
+</noscript>
+</main>
+<footer>
+<div class="wrap footer-top">
+<div>
+<a class="brand" href="index.html">
+<span class="brand-icon">&lt;/&gt;</span>
+<span>
+            Codrax
+            <span class="brand-sub">ACADEMY</span>
+</span>
+</a>
+<p>
+          Start with understanding.<br/>
+          Grow with every line of code.
+        </p>
+</div>
+<div>
+<h3>Explore</h3>
+<a href="courses.html">Courses &amp; fees</a>
+<a href="index.html#practice">Try a Java lesson</a>
+<a href="contact.html">Get in touch</a>
+</div>
+<div>
+<h3>Let’s talk</h3>
+<a href="mailto:codestart9989@gmail.com">
+          codestart9989@gmail.com
+        </a>
+<a href="tel:+917075405512">
+          +91 70754 05512
+        </a>
+<p>Live online classes · Learn from anywhere</p>
+</div>
+</div>
+<div class="wrap footer-bottom">
+<span>© 2026 Codrax Academy</span>
+<div>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms &amp; fee information</a>
+</div>
+</div>
+</footer>
+</body>
+</html>
