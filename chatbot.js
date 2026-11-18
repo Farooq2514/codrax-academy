@@ -1,200 +1,129 @@
 (() => {
   "use strict";
 
-  // Prevent duplicate widgets if the script is included twice.
   if (document.getElementById("codrax-chat")) return;
 
   const courses = window.CODRAX_COURSES || [];
   const packageData = window.CODRAX_PACKAGE;
+  const money = amount => "₹" + Number(amount).toLocaleString("en-IN");
+  const contact = "Call +91 70754 05512 or email codestart9989@gmail.com.";
 
-  const individualTotal = courses.reduce(
-    (total, course) => total + course.price,
-    0
-  );
+  function getCourse(id) {
+    const resolved = window.CODRAX_COURSE_ALIASES?.[id] || id;
+    return courses.find(course => course.id === resolved);
+  }
 
-  const packagePrice = packageData?.price ?? 16749;
-  const saving = individualTotal - packagePrice;
-  const mentorCredits = courses.length * 3;
+  function findCourse(question) {
+    const normalized = question.replace(/[^a-z0-9]+/g, " ").trim();
+    const aliases = [
+      ["java backend", "java"], ["backend", "backend"],
+      ["spring boot", "springboot"], ["springboot", "springboot"],
+      ["sql", "sql"], ["ai agents", "ai-agent"], ["ai agent", "ai-agent"],
+      ["high level design", "hld"], ["hld", "hld"],
+      ["low level design", "lld"], ["lld", "lld"],
+      ["data structures", "dsa"], ["dsa", "dsa"],
+      ["git", "git"], ["html", "html-css"], ["css", "html-css"]
+    ];
+    const alias = aliases.find(([name]) => (` ${normalized} `).includes(` ${name} `));
+    if (alias) return getCourse(alias[1]);
 
-  const money = amount =>
-    "₹" + amount.toLocaleString("en-IN");
-
-  const contact =
-    "Call +91 70754 05512 or email codestart9989@gmail.com.";
+    return courses.find(course => normalized.includes(course.id.replace(/-/g, " ")) ||
+      course.name.toLowerCase().split(/[^a-z0-9]+/).some(word => word.length > 3 && normalized.includes(word)));
+  }
 
   function packageReply() {
-    if (courses.length !== 7) {
-      return "Please contact us for the complete package and current fees. " +
-        contact;
-    }
+    return `${packageData.description}\n\n` +
+      `Package fee: ${money(packageData.price)}.\n` +
+      `The same four course paths cost ${money(packageData.individualOfferTotal)} ` +
+      `at their listed launch fees when purchased separately.\n` +
+      `Saving: ${money(packageData.savings)}.\n` +
+      `Mentor sessions: ${packageData.mentorSessions} total.\n\n` +
+      "Git & GitHub is included inside Java Backend Development and counted once. " +
+      "Confirm the course sequence and overall duration with the academy. " + contact;
+  }
 
-    return (
-      `The complete seven-course package costs ${money(packagePrice)}.\n\n` +
-      `Individual offer fees total ${money(individualTotal)}.\n` +
-      `You save ${money(saving)} — approximately 50%.\n\n` +
-      `Includes ${mentorCredits} mentor-session credits across seven courses, ` +
-      "three live online classes each week, assignments after every class, " +
-      "weekend personal TA support, hands-on projects, and monthly mocks.\n\n" +
-      "Contact us for the complete curriculum and schedule."
-    );
+  function courseReply(course) {
+    const mentor = course.mentorSessions
+      ? `${course.mentorSessions} mentor session${course.mentorSessions === 1 ? "" : "s"} included.`
+      : "Mentor sessions are not included in this standalone course.";
+    const topicHighlights = (course.highlights || []).join(", ");
+    return `${course.name}\n${money(course.price)} launch fee per student · ${course.duration}.\n\n` +
+      `${course.summary}\n${mentor}\n\nSelected topic highlights:\n${topicHighlights}\n\n` +
+      "Classes are live online three times a week, with an assignment after every class and weekend TA support. " +
+      "Ask the academy to confirm the batch timetable and final outline. " + contact;
   }
 
   function reply(question) {
     const q = String(question).toLowerCase().trim();
+    if (!q) return "Ask about course topics, durations, fees, AI, TA support, or mentor sessions.";
 
-    if (!q) {
-      return "Ask me about courses, fees, projects, or learning support.";
-    }
-
-    if (/\bpackage\b|\bbundle\b|all\s+(?:seven\s+|7\s+)?courses|combined|\btotal\b/.test(q)) {
+    if (/package|bundle|combined|all\s+(?:courses|programmes)|complete developer/.test(q)) {
       return packageReply();
     }
 
-    if (/\bprojects?\b|hands[\s-]?on/.test(q)) {
-      return (
-        "Codrax courses include hands-on projects and practical work. " +
-        "Apply what you learn, test your ideas, and explain your approach. " +
-        "Contact us for project details for your chosen course."
-      );
+    if (/mentor|credit/.test(q)) {
+      return "The Java Backend Development batch includes 1 mentor session. The Complete Developer Package includes 3 mentor sessions total. Standalone DSA, LLD, Git & GitHub, HTML & CSS, HLD and AI & Agents do not include mentor sessions. Weekend TA support is separate. Confirm session length and booking arrangements with the academy.";
     }
 
-    if (/duration|months?|weeks?|how long|length|syllabus|curricul|topics/.test(q)) {
-      return (
-        "Contact us for course length, the detailed curriculum, " +
-        "and the complete learning plan. " + contact
-      );
+    if (/teaching assistant|\bta\b|doubt|weekend/.test(q)) {
+      return "Weekend teaching assistant support helps learners with doubts, assignment attempts and understanding errors. Contact the academy for current support hours and whether sessions are individual or group-based. " + contact;
     }
 
-    if (/mentor|credits?/.test(q)) {
-      return (
-        "Each course includes three complimentary mentor-session credits. " +
-        "The seven-course package includes 21 credits in total. " +
-        "Weekend TA support is separate.\n\n" +
-        "Contact us to confirm mentor-session length, booking arrangements, " +
-        "and credit validity."
-      );
+    if (/streak|attendance|dashboard/.test(q)) {
+      return "The student dashboard is planned to help learners follow attendance and problem-solving streaks, assignment completion and progress. Contact the academy for current dashboard availability.";
     }
 
-    if (/\bta\b|teaching assistant|doubts?|weekend/.test(q)) {
-      return (
-        "Personal teaching assistant support is available every weekend " +
-        "to help with doubts, assignment difficulties, and understanding " +
-        "your mistakes. Contact us for support slots and arrangements."
-      );
+    if (/topic|syllabus|curriculum/.test(q)) {
+      const course = findCourse(q);
+      return course
+        ? courseReply(course)
+        : "The website shows selected topic highlights for Java Backend Development, DSA, LLD, Git & GitHub, HTML & CSS, HLD and AI & Agents. Tell me which course you mean, or contact the academy for the final learning plan.";
     }
 
-    if (/\bmock\b|assessment|\btest\b/.test(q)) {
-      return (
-        "Monthly mock assessments help you check your understanding " +
-        "and identify areas to improve during your active programme. " +
-        "Contact us for the format and assessment schedule."
-      );
+    if (/class|live|schedule|timing|batch/.test(q)) {
+      return "Classes are online three times each week, with an assignment after every class. Batch days, times, teaching language, recording access and total sessions should be confirmed with the academy before enrolment. " + contact;
     }
 
-    if (/assignment|homework|practi[cs]e/.test(q)) {
-      return (
-        "You receive an assignment after every class. Use the time between " +
-        "your three weekly classes to practise and improve your skills. " +
-        "Your weekend TA can help with doubts and assignment difficulties."
-      );
+    if (/mock|assessment|test/.test(q)) {
+      return "Monthly mock assessments are part of the learning support plan. Ask the academy about the mock format, topic coverage and feedback process.";
     }
 
-    if (/timings?|\btime\b|schedule|days?|batch|online|offline|location/.test(q)) {
-      return (
-        "All classes are online, three times each week. Assignments follow " +
-        "every class, with personal TA support at weekends. " +
-        "Contact us for batch timings and teaching language. " + contact
-      );
+    if (/assignment|practice|practise|hands.?on|project|implementation/.test(q)) {
+      return "Assignments follow every class. The focus is to write and run your own code, test your solution and explain your approach. Weekend TA support is available for doubts. " + contact;
     }
 
-    if (/refund|payment|\bpay\b|instal+ments?/.test(q)) {
-      return (
-        "Contact the academy for payment arrangements and get the applicable " +
-        "refund conditions in writing before paying. " +
-        "This website does not collect payments."
-      );
+    if (/duration|how long|length|months?|weeks?/.test(q)) {
+      const course = findCourse(q);
+      if (course) return `${course.name}: ${course.duration}. The exact batch dates and meeting schedule will be confirmed before enrolment.`;
+      return "Java is 1 month, SQL is 15 days and Spring Boot is 1 month within the combined Java Backend Development course. LLD and HLD are 2 months each; AI & Agents is 21 days. DSA, Git & GitHub and HTML & CSS durations need confirmation. " + contact;
     }
 
-    if (/\bai\b|artificial intelligence/.test(q)) {
-      return (
-        "I am a course FAQ assistant using prepared answers. " +
-        "AI integration is not currently listed as an included course. " +
-        "Contact the academy for curriculum updates."
-      );
+    if (/price|fee|cost|how much|course/.test(q)) {
+      const course = findCourse(q);
+      if (course) return courseReply(course);
+      const fees = courses.map(course => `${course.name}: ${money(course.price)}`).join("\n");
+      return `${fees}\n\nComplete Developer Package: ${money(packageData.price)}. ` +
+        "The package contains Java Backend Development, DSA, Low-Level Design and HTML & CSS. Git & GitHub is included in the backend batch.";
     }
 
-    if (/demo|join|enrol|admission|contact|email|\bphone\b|\bcall\b/.test(q)) {
-      return (
-        "Request a free demo or discuss admission through our enquiry page. " +
-        "The form prepares an email that you must send from your email app. " +
-        "Demo timing and admission are confirmed directly by the academy.\n\n" +
-        contact
-      );
+    if (/artificial|\bai\b|agent|gpt|rag|prompt/.test(q)) {
+      const aiCourse = getCourse("ai-agents");
+      return `${aiCourse.name} is a separate ${aiCourse.duration} course at ${money(aiCourse.price)}. It covers the LLM landscape, prompt engineering, LLM tools, RAG, agents, n8n, Zapier, OpenClaw, multi-agent systems and AI debugging tools. The Java backend course also includes practice using GPT to assist with coding and checking generated suggestions.`;
     }
 
-    const aliases = [
-      [/\bspring(?:\s*boot)?\b|\bspringboot\b/, "springboot"],
-      [/\bhtml\b|\bcss\b/, "html-css"],
-      [/\bgit\b|\bgithub\b/, "git"],
-      [/\bsql\b|database/, "sql"],
-      [/\bdsa\b|data structures?|algorithms?/, "dsa"],
-      [/\blld\b|low[\s-]?level design|\bdesign\b/, "lld"],
-      [/\bjava\b/, "java"]
-    ];
-
-    const match = aliases.find(([pattern]) => pattern.test(q));
-
-    if (match) {
-      const course = courses.find(item => item.id === match[1]);
-
-      if (!course) {
-        return "Contact us for the latest course information. " + contact;
-      }
-
-      const regularFee = Number.isFinite(course.regularPrice)
-        ? `Regular fee: ${money(course.regularPrice)}.\n`
-        : "";
-
-      return (
-        `${course.name}\n\n` +
-        regularFee +
-        `Offer fee: ${money(course.price)}.\n\n` +
-        "Includes three weekly live online classes, assignments, " +
-        "weekend personal TA support, three mentor-session credits, " +
-        "hands-on practical work, and monthly mocks.\n\n" +
-        "Request the full curriculum and schedule through our enquiry page."
-      );
+    if (/demo|join|enrol|admission|contact|email|phone|call/.test(q)) {
+      return "Request a free demo through the enquiry page. The academy will contact you to agree a time and send the joining details. A request is not a confirmed booking until a time is agreed. " + contact;
     }
 
-    if (/prices?|fees?|cost|courses?/.test(q)) {
-      if (!courses.length) {
-        return "Please contact us for current course fees. " + contact;
-      }
-
-      const fees = courses.map(course =>
-        `${course.name}: ${money(course.price)}`
-      ).join("\n");
-
-      return (
-        fees +
-        `\n\nIndividual offer total: ${money(individualTotal)}.` +
-        `\nComplete package: ${money(packagePrice)}.` +
-        `\nPackage saving: ${money(saving)}.`
-      );
+    if (/refund|payment|pay|installment/.test(q)) {
+      return "Before paying, ask for the full payable amount, payment options, cancellation and refund terms in writing. This website does not take payments. " + contact;
     }
 
-    if (/^(hi|hello|hey|salaam|assalam)\b/.test(q)) {
-      return (
-        "Welcome to Codrax Academy! Ask about course fees, " +
-        "the complete package, projects, mentors, or weekend TA support."
-      );
+    if (/^(hi|hello|hey|assalam|salaam)\b/.test(q)) {
+      return "Welcome to Codrax Academy. Ask about Java Backend, DSA, LLD, HLD, AI Agents, course fees, practical work or learning support.";
     }
 
-    return (
-      "I can help with Codrax courses, prices, the complete package, " +
-      "projects, assignments, TA support, mentors, and monthly mocks.\n\n" +
-      "For other questions, " + contact
-    );
+    return "I can answer prepared FAQs about Codrax courses, topics, durations, fees, AI Agents, assignments, TA support and mentor sessions. For other questions, " + contact;
   }
 
   window.CodraxFAQ = { reply };
@@ -205,24 +134,7 @@
   toggle.setAttribute("aria-label", "Open Codrax course assistant");
   toggle.setAttribute("aria-expanded", "false");
   toggle.setAttribute("aria-controls", "codrax-chat");
-
-  toggle.innerHTML = `
-    <svg width="28" height="28" viewBox="0 0 24 24"
-         fill="none" aria-hidden="true">
-      <path
-        d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H6l-4 2V11.5a9.5 9.5 0 0 1 19 0Z"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linejoin="round">
-      </path>
-      <path d="M7 9h10M7 13h7"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round">
-      </path>
-    </svg>
-    <span>Ask Codrax</span>
-  `;
+  toggle.innerHTML = '<span aria-hidden="true">✦</span><span>Ask Codrax</span>';
 
   const panel = document.createElement("section");
   panel.id = "codrax-chat";
@@ -230,71 +142,40 @@
   panel.hidden = true;
   panel.setAttribute("role", "dialog");
   panel.setAttribute("aria-labelledby", "chat-title");
-
   panel.innerHTML = `
     <div class="codrax-chat-header">
-      <div>
-        <strong id="chat-title">Codrax Assistant</strong>
-        <small>Course &amp; admission FAQs</small>
-      </div>
+      <div><strong id="chat-title">Codrax Assistant</strong><small>Course and admissions FAQs</small></div>
       <button type="button" aria-label="Close course assistant">×</button>
     </div>
-
-    <div class="codrax-chat-log"
-         role="log"
-         aria-live="polite"
-         aria-relevant="additions">
-    </div>
-
+    <div class="codrax-chat-log" role="log" aria-live="polite" aria-relevant="additions"></div>
     <div class="chat-quick">
       <button type="button">Course fees</button>
-      <button type="button">Complete package</button>
-      <button type="button">TA support</button>
+      <button type="button">AI Agents course</button>
+      <button type="button">Mentor sessions</button>
     </div>
-
-    <a class="chat-contact" href="courses.html#package">
-      Explore the complete package →
-    </a>
-
-    <a class="chat-contact" href="contact.html">
-      Speak to the academy →
-    </a>
-
+    <a class="chat-contact" href="courses.html#package">Explore the complete package →</a>
+    <a class="chat-contact" href="contact.html">Speak to the academy →</a>
     <form class="codrax-chat-form">
-      <label class="sr-only" for="chat-question">
-        Ask a course question
-      </label>
-      <input id="chat-question"
-             placeholder="Ask about courses or support…"
-             maxlength="500"
-             required
-             autocomplete="off">
+      <label class="sr-only" for="chat-question">Ask a course question</label>
+      <input id="chat-question" placeholder="Ask about courses or support…" maxlength="500" required autocomplete="off">
       <button type="submit" aria-label="Send question">→</button>
     </form>
-
-    <p class="chat-disclosure">
-      Prepared FAQ answers · Chat is not saved
-    </p>
-  `;
+    <p class="chat-disclosure">Prepared FAQ answers · Chat is not saved</p>`;
 
   document.body.append(toggle, panel);
-
   const input = panel.querySelector("input");
   const log = panel.querySelector('[role="log"]');
 
   function add(text, user = false) {
     const message = document.createElement("p");
-    message.className = user
-      ? "chat-user-message"
-      : "chat-bot-message";
-
+    message.className = user ? "chat-user-message" : "chat-bot-message";
     message.textContent = text;
     message.style.whiteSpace = "pre-wrap";
     log.append(message);
     log.scrollTop = log.scrollHeight;
   }
 
-  function closeChat() {
+  function close() {
     panel.hidden = true;
     toggle.setAttribute("aria-expanded", "false");
     toggle.focus();
@@ -303,23 +184,19 @@
   toggle.addEventListener("click", () => {
     panel.hidden = !panel.hidden;
     toggle.setAttribute("aria-expanded", String(!panel.hidden));
-
     if (!panel.hidden) input.focus();
   });
 
-  panel.querySelector(".codrax-chat-header button")
-    .addEventListener("click", closeChat);
-
+  panel.querySelector(".codrax-chat-header button").addEventListener("click", close);
   panel.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeChat();
+    if (event.key === "Escape") close();
   });
 
-  function ask(question) {
-    const text = question.trim();
-    if (!text) return;
-
-    add(text, true);
-    add(reply(text));
+  function ask(text) {
+    const question = text.trim();
+    if (!question) return;
+    add(question, true);
+    add(reply(question));
     input.value = "";
     input.focus();
   }
@@ -333,8 +210,5 @@
     button.addEventListener("click", () => ask(button.textContent));
   });
 
-  add(
-    "Welcome to Codrax Academy! Ask me about course fees, " +
-    "the complete package, hands-on projects, or learning support."
-  );
+  add("Welcome to Codrax Academy. Ask about course fees, topics, HLD, AI Agents or the support included with your course.");
 })();
