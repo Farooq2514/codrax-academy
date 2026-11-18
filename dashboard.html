@@ -1001,6 +1001,134 @@
         animation: none !important;
       }
     }
+    /* Polished dark theme */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0B1220;
+  --surface: #111C2E;
+  --blue: #60A5FA;
+  --blue-dark: #3B82F6;
+  --blue-soft: #172B46;
+  --navy: #E5EDF8;
+  --text: #CBD5E1;
+  --muted: #94A3B8;
+  --line: #26364D;
+  --green: #4ADE80;
+  --green-soft: #123326;
+  --amber: #FBBF24;
+  --amber-soft: #382B14;
+  --shadow: 0 8px 28px rgba(0, 0, 0, .18);
+}
+
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(ellipse at 75% -20%, rgba(37, 99, 235, .13), transparent 42%),
+    var(--background);
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .topbar,
+:root[data-theme="dark"] .subnav,
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .stat-box,
+:root[data-theme="dark"] .next-class,
+:root[data-theme="dark"] .welcome-small,
+:root[data-theme="dark"] .calendar-item,
+:root[data-theme="dark"] .upcoming-lesson,
+:root[data-theme="dark"] .assignment-row,
+:root[data-theme="dark"] .curriculum-module,
+:root[data-theme="dark"] .chat,
+:root[data-theme="dark"] .drawer {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .demo-note,
+:root[data-theme="dark"] .profile-select,
+:root[data-theme="dark"] .btn.gray,
+:root[data-theme="dark"] .label,
+:root[data-theme="dark"] .schedule-status {
+  background-color: #172438;
+  color: var(--text);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  background-color: #0D1727;
+  color: var(--text);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .top-chip,
+:root[data-theme="dark"] .menu-link {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .top-chip:hover,
+:root[data-theme="dark"] .menu-link:hover,
+:root[data-theme="dark"] .subnav button:hover {
+  background-color: var(--blue-soft);
+  color: #BFDBFE;
+}
+
+:root[data-theme="dark"] .btn {
+  background: #3B82F6;
+  color: #071426;
+}
+
+:root[data-theme="dark"] .btn:hover {
+  background: #93C5FD;
+}
+
+:root[data-theme="dark"] .btn.light {
+  background: var(--blue-soft);
+  color: #BFDBFE;
+}
+
+:root[data-theme="dark"] .label.green,
+:root[data-theme="dark"] .schedule-status.completed {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+:root[data-theme="dark"] .label.orange,
+:root[data-theme="dark"] .schedule-status.pending,
+:root[data-theme="dark"] .schedule-status.today,
+:root[data-theme="dark"] .schedule-status.upcoming {
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.theme-toggle span:first-child {
+  font-size: 16px;
+}
+
+.theme-toggle:active {
+  transform: scale(.97);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  .topbar,
+  .subnav,
+  .panel,
+  .stat-box,
+  .next-class,
+  .welcome-small,
+  .top-chip,
+  .btn {
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+}
   </style>
 </head>
 
@@ -1043,8 +1171,13 @@
       </button>
     </div>
 
-    <button class="top-chip" data-page="progress">My progress</button>
-    <button class="top-chip" data-page="support">Ask support</button>
+<button class="top-chip" data-page="progress">My progress</button>
+<button class="top-chip" data-page="support">Ask support</button>
+<button class="top-chip theme-toggle" id="theme-toggle" type="button"
+        aria-label="Switch to light theme">
+  <span id="theme-icon" aria-hidden="true">☀</span>
+  <span id="theme-label">Light mode</span>
+</button>
 
     <select class="profile-select" id="profile" aria-label="Demo profile">
       <option value="umar">Umar · Java student</option>
@@ -1196,6 +1329,43 @@
 
         return `<svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">${paths[name] || paths.book}</svg>`;
       }
+const themeToggle = $("#theme-toggle");
+const themeIcon = $("#theme-icon");
+const themeLabel = $("#theme-label");
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+
+  const isDark = theme === "dark";
+  themeIcon.textContent = isDark ? "☀" : "☾";
+  themeLabel.textContent = isDark ? "Light mode" : "Dark mode";
+  themeToggle.setAttribute(
+    "aria-label",
+    isDark ? "Switch to light theme" : "Switch to dark theme"
+  );
+
+  try {
+    localStorage.setItem("codrax-dashboard-theme", theme);
+  } catch {
+    // The dashboard still works when browser storage is unavailable.
+  }
+}
+
+let savedTheme = "dark";
+
+try {
+  savedTheme = localStorage.getItem("codrax-dashboard-theme") || "dark";
+} catch {
+  // Use the dark theme by default.
+}
+
+applyTheme(savedTheme);
+
+themeToggle.addEventListener("click", () => {
+  const nextTheme =
+    document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme);
+});
 
       function hydrateIcons() {
         document.querySelectorAll("[data-icon]").forEach(element => {
