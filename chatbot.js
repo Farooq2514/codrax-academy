@@ -134,8 +134,12 @@
   toggle.setAttribute("aria-label", "Open Codrax course assistant");
   toggle.setAttribute("aria-expanded", "false");
   toggle.setAttribute("aria-controls", "codrax-chat");
-  toggle.innerHTML = '<span aria-hidden="true">✦</span><span>Ask Codrax</span>';
-
+  toggle.innerHTML =
+  '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+  '<rect x="4" y="7" width="16" height="13" rx="4" stroke="currentColor" stroke-width="1.8"/>' +
+  '<path d="M12 3v4M2 12h2M20 12h2M8 13h.01M16 13h.01M9 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
+  '<circle cx="12" cy="3" r="1.5" fill="currentColor"/>' +
+  '</svg><span>Ask Codrax</span>';
   const panel = document.createElement("section");
   panel.id = "codrax-chat";
   panel.className = "codrax-chat";
